@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h1>Promise Exercises</h1>
+
+    <h2>Exercise 1</h2>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+
+    <h2>Exercise 2</h2>
+    <p id="demo4"></p>
+    <p id="demo5"></p>
+    <p id="demo6"></p>
+
+    <h2>Exercise 3</h2>
+    <p id="demo7"></p>
+    <p id="demo8"></p>
+    <p id="demo9"></p>
+    <p id="demo10"></p>
+
+    <script>
+
+        // Exercise 1
+
+        document.getElementById("demo1").innerHTML = 'Program 1 started';
+
+        const promise1 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res('Program 1 complete')
+            }, 5000)
+        })
+
+        document.getElementById("demo2").innerHTML = 'Program 1 in progress...';
+
+        promise1.then((val) => {
+            document.getElementById("demo3").innerHTML = val
+        })
+
+        // Exercise 2
+
+        document.getElementById("demo4").innerHTML = 'Program 2 started';
+
+        const promise2 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res('Program 2 complete')
+            }, 3000)
+            setTimeout(() => {
+                rej('Program 2 fail')
+            }, 2000)
+        })
+
+        document.getElementById("demo5").innerHTML = 'Program 1 in progress...';
+
+        promise2.then((val) => {
+            document.getElementById("demo6").innerHTML = val
+        }).catch((err)=>{
+            document.getElementById("demo6").innerHTML = err
+        })
+
+        // Exercise 3
+
+        const promise3 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(10)
+            }, 3000)
+        })  
+        
+        const promise4 = new Promise((res, rej) => {
+            setTimeout(() => {
+                res(20)
+            }, 5000)
+        }) 
+
+        Promise.all([promise3, promise4]).then((vals) => {
+            document.getElementById("demo7").innerHTML = vals
+            let valA = vals[0]
+            let valB = vals[1]
+            document.getElementById("demo8").innerHTML = valA
+            document.getElementById("demo9").innerHTML = valB
+            let valR = valA + valB
+            document.getElementById("demo10").innerHTML = valR
+        })
+
+    </script>
+
+</body>
+
+</html>
